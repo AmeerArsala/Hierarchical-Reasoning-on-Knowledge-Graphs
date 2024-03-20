@@ -6,6 +6,7 @@ channels:
 dependencies:
   - python=3.8
   - numpy
+  - tqdm
   - pytorch
   - torchvision
   - pytorch-cuda=11.8
@@ -17,6 +18,9 @@ dependencies:
   - transformers
   - safetensors
   - datasets
+  - nltk
+  - spacy
+  - wandb
   - jupyter
   - python-dotenv
   - poetry
