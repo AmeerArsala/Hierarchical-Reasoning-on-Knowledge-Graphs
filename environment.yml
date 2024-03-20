@@ -21,6 +21,8 @@ dependencies:
   - nltk
   - spacy
   - wandb
+  - tensorboardx
+  - tensorboard
   - jupyter
   - python-dotenv
   - poetry
