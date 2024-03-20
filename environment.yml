@@ -1,0 +1,22 @@
+name: hierarchical_reasoning_kg
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.8
+  - numpy
+  - pytorch
+  - torchvision
+  - pytorch-cuda=11.8
+  - pyg::pytorch-scatter
+  - pyg::pytorch-cluster
+  - pyg::pytorch-sparse
+  - pyg::pytorch-spline-conv
+  - pyg::pyg
+  - transformers
+  - safetensors
+  - datasets
+  - jupyter
+  - python-dotenv
+  - poetry
