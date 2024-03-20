@@ -3,3 +3,9 @@
 .ipynb_checkpoints
 
 saved*
+
+__pycache__/
+
+*.pt
+*.zip
+data/
