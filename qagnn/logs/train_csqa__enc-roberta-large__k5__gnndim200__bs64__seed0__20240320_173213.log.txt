@@ -1,0 +1,367 @@
+Model name list: dict_items([('openai-community/openai-gpt', 'gpt'), ('google-bert/bert-base-uncased', 'bert'), ('google-bert/bert-large-uncased', 'bert'), ('google-bert/bert-base-cased', 'bert'), ('google-bert/bert-large-cased', 'bert'), ('google-bert/bert-base-multilingual-uncased', 'bert'), ('google-bert/bert-base-multilingual-cased', 'bert'), ('google-bert/bert-base-chinese', 'bert'), ('google-bert/bert-base-german-cased', 'bert'), ('google-bert/bert-large-uncased-whole-word-masking', 'bert'), ('google-bert/bert-large-cased-whole-word-masking', 'bert'), ('google-bert/bert-large-uncased-whole-word-masking-finetuned-squad', 'bert'), ('google-bert/bert-large-cased-whole-word-masking-finetuned-squad', 'bert'), ('google-bert/bert-base-cased-finetuned-mrpc', 'bert'), ('google-bert/bert-base-german-dbmdz-cased', 'bert'), ('google-bert/bert-base-german-dbmdz-uncased', 'bert'), ('cl-tohoku/bert-base-japanese', 'bert'), ('cl-tohoku/bert-base-japanese-whole-word-masking', 'bert'), ('cl-tohoku/bert-base-japanese-char', 'bert'), ('cl-tohoku/bert-base-japanese-char-whole-word-masking', 'bert'), ('TurkuNLP/bert-base-finnish-cased-v1', 'bert'), ('TurkuNLP/bert-base-finnish-uncased-v1', 'bert'), ('wietsedv/bert-base-dutch-cased', 'bert'), ('xlnet/xlnet-base-cased', 'xlnet'), ('xlnet/xlnet-large-cased', 'xlnet'), ('FacebookAI/roberta-base', 'roberta'), ('FacebookAI/roberta-large', 'roberta'), ('FacebookAI/roberta-large-mnli', 'roberta'), ('distilbert/distilroberta-base', 'roberta'), ('openai-community/roberta-base-openai-detector', 'roberta'), ('openai-community/roberta-large-openai-detector', 'roberta'), ('lstm', 'lstm'), ('albert/albert-base-v1', 'albert'), ('albert/albert-large-v1', 'albert'), ('albert/albert-xlarge-v1', 'albert'), ('albert/albert-xxlarge-v1', 'albert'), ('albert/albert-base-v2', 'albert'), ('albert/albert-large-v2', 'albert'), ('albert/albert-xlarge-v2', 'albert'), ('albert/albert-xxlarge-v2', 'albert')])
+CREATION
+pid: 1388214
+conda env: hierarchical_reasoning_kg
+screen: 
+
+gpu: 0,1
+
+Namespace(att_head_num=2, batch_size=64, cuda=True, dataset='csqa', debug=False, decoder_lr=0.001, dev_adj='data/csqa/graph/dev.graph.adj.pk', dev_statements='data/csqa/statement/dev.statement.jsonl', drop_partial_batch=False, dropoutf=0.2, dropoutg=0.2, dropouti=0.2, encoder='FacebookAI/roberta-large', encoder_layer=-1, encoder_lr=1e-05, ent_emb=['tzw'], ent_emb_paths=['data/cpnet/tzw.ent.npy'], eval_batch_size=2, fc_dim=200, fc_layer_num=0, fill_partial_batch=False, fp16=True, freeze_ent_emb=True, gnn_dim=200, inhouse=True, inhouse_train_qids='data/csqa/inhouse_split_qids.txt', init_range=0.02, k=5, load_model_path=None, log_interval=10, loss='cross_entropy', lr_schedule='fixed', max_epochs_before_stop=10, max_grad_norm=1.0, max_node_num=200, max_seq_len=100, mini_batch_size=2, mode='train', n_epochs=15, num_relation=38, optim='radam', refreeze_epoch=10000, save_dir='saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213', save_model=True, seed=0, simple=False, subsample=1.0, test_adj='data/csqa/graph/test.graph.adj.pk', test_statements='data/csqa/statement/test.statement.jsonl', train_adj='data/csqa/graph/train.graph.adj.pk', train_statements='data/csqa/statement/train.statement.jsonl', unfreeze_epoch=4, use_cache=True, warmup_steps=150, weight_decay=0.01)
+| num_concepts: 799273 |
+train_statement_path data/csqa/statement/train.statement.jsonl
+num_choice 5
+| ori_adj_len: mu 121.54 sigma 94.04 | adj_len: 107.96 | prune_rate： 0.17 | qc_num: 7.43 | ac_num: 2.07 |
+| ori_adj_len: mu 118.44 sigma 90.55 | adj_len: 106.55 | prune_rate： 0.15 | qc_num: 7.20 | ac_num: 2.05 |
+| ori_adj_len: mu 119.20 sigma 93.49 | adj_len: 106.22 | prune_rate： 0.16 | qc_num: 7.38 | ac_num: 2.05 |
+args.num_relation 38
+parameters:
+	concept_emb.emb.weight                       	fixed	torch.Size([799273, 1024])	device:cuda:0
+	concept_emb.cpt_transform.weight             	trainable	torch.Size([200, 1024])	device:cuda:0
+	concept_emb.cpt_transform.bias               	trainable	torch.Size([200])	device:cuda:0
+	svec2nvec.weight                             	trainable	torch.Size([200, 1024])	device:cuda:0
+	svec2nvec.bias                               	trainable	torch.Size([200])	device:cuda:0
+	gnn.emb_node_type.weight                     	trainable	torch.Size([100, 4])	device:cuda:0
+	gnn.emb_node_type.bias                       	trainable	torch.Size([100])	device:cuda:0
+	gnn.emb_score.weight                         	trainable	torch.Size([100, 100])	device:cuda:0
+	gnn.emb_score.bias                           	trainable	torch.Size([100])	device:cuda:0
+	gnn.edge_encoder.0.weight                    	trainable	torch.Size([200, 47])	device:cuda:0
+	gnn.edge_encoder.0.bias                      	trainable	torch.Size([200])	device:cuda:0
+	gnn.edge_encoder.1.weight                    	trainable	torch.Size([200])	device:cuda:0
+	gnn.edge_encoder.1.bias                      	trainable	torch.Size([200])	device:cuda:0
+	gnn.edge_encoder.3.weight                    	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.edge_encoder.3.bias                      	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.0.linear_key.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.0.linear_key.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.0.linear_msg.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.0.linear_msg.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.0.linear_query.weight         	trainable	torch.Size([200, 400])	device:cuda:0
+	gnn.gnn_layers.0.linear_query.bias           	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.0.mlp.0.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.0.mlp.0.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.0.mlp.1.weight                	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.0.mlp.1.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.0.mlp.3.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.0.mlp.3.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.1.linear_key.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.1.linear_key.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.1.linear_msg.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.1.linear_msg.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.1.linear_query.weight         	trainable	torch.Size([200, 400])	device:cuda:0
+	gnn.gnn_layers.1.linear_query.bias           	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.1.mlp.0.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.1.mlp.0.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.1.mlp.1.weight                	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.1.mlp.1.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.1.mlp.3.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.1.mlp.3.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.2.linear_key.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.2.linear_key.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.2.linear_msg.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.2.linear_msg.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.2.linear_query.weight         	trainable	torch.Size([200, 400])	device:cuda:0
+	gnn.gnn_layers.2.linear_query.bias           	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.2.mlp.0.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.2.mlp.0.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.2.mlp.1.weight                	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.2.mlp.1.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.2.mlp.3.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.2.mlp.3.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.3.linear_key.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.3.linear_key.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.3.linear_msg.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.3.linear_msg.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.3.linear_query.weight         	trainable	torch.Size([200, 400])	device:cuda:0
+	gnn.gnn_layers.3.linear_query.bias           	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.3.mlp.0.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.3.mlp.0.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.3.mlp.1.weight                	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.3.mlp.1.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.3.mlp.3.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.3.mlp.3.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.4.linear_key.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.4.linear_key.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.4.linear_msg.weight           	trainable	torch.Size([200, 600])	device:cuda:0
+	gnn.gnn_layers.4.linear_msg.bias             	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.4.linear_query.weight         	trainable	torch.Size([200, 400])	device:cuda:0
+	gnn.gnn_layers.4.linear_query.bias           	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.4.mlp.0.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.4.mlp.0.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.4.mlp.1.weight                	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.4.mlp.1.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.gnn_layers.4.mlp.3.weight                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.gnn_layers.4.mlp.3.bias                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.Vh.weight                                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.Vh.bias                                  	trainable	torch.Size([200])	device:cuda:0
+	gnn.Vx.weight                                	trainable	torch.Size([200, 200])	device:cuda:0
+	gnn.Vx.bias                                  	trainable	torch.Size([200])	device:cuda:0
+	pooler.w_qs.weight                           	trainable	torch.Size([200, 1024])	device:cuda:0
+	pooler.w_qs.bias                             	trainable	torch.Size([200])	device:cuda:0
+	pooler.w_ks.weight                           	trainable	torch.Size([200, 200])	device:cuda:0
+	pooler.w_ks.bias                             	trainable	torch.Size([200])	device:cuda:0
+	pooler.w_vs.weight                           	trainable	torch.Size([200, 200])	device:cuda:0
+	pooler.w_vs.bias                             	trainable	torch.Size([200])	device:cuda:0
+	fc.layers.0-Linear.weight                    	trainable	torch.Size([1, 1424])	device:cuda:0
+	fc.layers.0-Linear.bias                      	trainable	torch.Size([1])	device:cuda:0
+	total: 2845025
+
+-----------------------------------------------------------------------
+Using fp16 training
+| step     9 |  lr: 0.0000100 | loss  1.6333 | ms/batch 3798.29 |
+| step    19 |  lr: 0.0000100 | loss  1.6247 | ms/batch 3764.62 |
+| step    29 |  lr: 0.0000100 | loss  1.6092 | ms/batch 3887.86 |
+| step    39 |  lr: 0.0000100 | loss  1.5678 | ms/batch 3776.16 |
+| step    49 |  lr: 0.0000100 | loss  1.5366 | ms/batch 3796.61 |
+| step    59 |  lr: 0.0000100 | loss  1.5219 | ms/batch 3815.03 |
+| step    69 |  lr: 0.0000100 | loss  1.5323 | ms/batch 3908.68 |
+| step    79 |  lr: 0.0000100 | loss  1.5228 | ms/batch 3863.00 |
+| step    89 |  lr: 0.0000100 | loss  1.5003 | ms/batch 3883.76 |
+| step    99 |  lr: 0.0000100 | loss  1.4718 | ms/batch 3878.98 |
+| step   109 |  lr: 0.0000100 | loss  1.5101 | ms/batch 4037.85 |
+| step   119 |  lr: 0.0000100 | loss  1.4843 | ms/batch 3932.92 |
+| step   129 |  lr: 0.0000100 | loss  1.4794 | ms/batch 3891.79 |
+-----------------------------------------------------------------------
+| epoch   0 | step   133 | dev_acc  0.3964 | test_acc  0.4029 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.0
+| step   139 |  lr: 0.0000100 | loss  1.4762 | ms/batch 2891.52 |
+| step   149 |  lr: 0.0000100 | loss  1.4510 | ms/batch 3962.82 |
+| step   159 |  lr: 0.0000100 | loss  1.3966 | ms/batch 4001.15 |
+| step   169 |  lr: 0.0000100 | loss  1.4350 | ms/batch 3977.49 |
+| step   179 |  lr: 0.0000100 | loss  1.4416 | ms/batch 3947.01 |
+| step   189 |  lr: 0.0000100 | loss  1.3896 | ms/batch 3978.64 |
+| step   199 |  lr: 0.0000100 | loss  1.4125 | ms/batch 4037.46 |
+| step   209 |  lr: 0.0000100 | loss  1.3647 | ms/batch 4026.97 |
+| step   219 |  lr: 0.0000100 | loss  1.4061 | ms/batch 3942.39 |
+| step   229 |  lr: 0.0000100 | loss  1.4188 | ms/batch 4033.82 |
+| step   239 |  lr: 0.0000100 | loss  1.3756 | ms/batch 4061.95 |
+| step   249 |  lr: 0.0000100 | loss  1.3461 | ms/batch 4083.33 |
+| step   259 |  lr: 0.0000100 | loss  1.3724 | ms/batch 4060.42 |
+-----------------------------------------------------------------------
+| epoch   1 | step   266 | dev_acc  0.4283 | test_acc  0.4134 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.1
+| step   269 |  lr: 0.0000100 | loss  1.4136 | ms/batch 1727.03 |
+| step   279 |  lr: 0.0000100 | loss  1.3243 | ms/batch 4138.51 |
+| step   289 |  lr: 0.0000100 | loss  1.3653 | ms/batch 4145.81 |
+| step   299 |  lr: 0.0000100 | loss  1.3587 | ms/batch 4301.83 |
+| step   309 |  lr: 0.0000100 | loss  1.3714 | ms/batch 4035.80 |
+| step   319 |  lr: 0.0000100 | loss  1.3636 | ms/batch 4061.45 |
+| step   329 |  lr: 0.0000100 | loss  1.3879 | ms/batch 4085.41 |
+| step   339 |  lr: 0.0000100 | loss  1.3767 | ms/batch 4000.21 |
+| step   349 |  lr: 0.0000100 | loss  1.3682 | ms/batch 3982.24 |
+| step   359 |  lr: 0.0000100 | loss  1.3783 | ms/batch 4055.74 |
+| step   369 |  lr: 0.0000100 | loss  1.3706 | ms/batch 4254.11 |
+| step   379 |  lr: 0.0000100 | loss  1.3421 | ms/batch 4124.82 |
+| step   389 |  lr: 0.0000100 | loss  1.3337 | ms/batch 4053.16 |
+-----------------------------------------------------------------------
+| epoch   2 | step   399 | dev_acc  0.4357 | test_acc  0.4327 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.2
+| step   399 |  lr: 0.0000100 | loss  1.3536 | ms/batch  464.29 |
+| step   409 |  lr: 0.0000100 | loss  1.3779 | ms/batch 4009.15 |
+| step   419 |  lr: 0.0000100 | loss  1.3877 | ms/batch 3947.59 |
+| step   429 |  lr: 0.0000100 | loss  1.3451 | ms/batch 3966.48 |
+| step   439 |  lr: 0.0000100 | loss  1.3403 | ms/batch 3878.77 |
+| step   449 |  lr: 0.0000100 | loss  1.3860 | ms/batch 3912.17 |
+| step   459 |  lr: 0.0000100 | loss  1.3195 | ms/batch 4089.13 |
+| step   469 |  lr: 0.0000100 | loss  1.3107 | ms/batch 3939.62 |
+| step   479 |  lr: 0.0000100 | loss  1.3570 | ms/batch 3954.28 |
+| step   489 |  lr: 0.0000100 | loss  1.3946 | ms/batch 3906.96 |
+| step   499 |  lr: 0.0000100 | loss  1.3584 | ms/batch 3972.90 |
+| step   509 |  lr: 0.0000100 | loss  1.3589 | ms/batch 3977.41 |
+| step   519 |  lr: 0.0000100 | loss  1.3363 | ms/batch 4029.31 |
+| step   529 |  lr: 0.0000100 | loss  1.3464 | ms/batch 3925.29 |
+-----------------------------------------------------------------------
+| epoch   3 | step   532 | dev_acc  0.4349 | test_acc  0.4384 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.3
+| step   539 |  lr: 0.0000100 | loss  1.3953 | ms/batch 6061.14 |
+| step   549 |  lr: 0.0000100 | loss  1.3652 | ms/batch 7150.60 |
+| step   559 |  lr: 0.0000100 | loss  1.3790 | ms/batch 7136.69 |
+| step   569 |  lr: 0.0000100 | loss  1.3172 | ms/batch 7162.94 |
+| step   579 |  lr: 0.0000100 | loss  1.3395 | ms/batch 7133.43 |
+| step   589 |  lr: 0.0000100 | loss  1.3134 | ms/batch 7118.77 |
+| step   599 |  lr: 0.0000100 | loss  1.3073 | ms/batch 7108.67 |
+| step   609 |  lr: 0.0000100 | loss  1.2925 | ms/batch 7309.03 |
+| step   619 |  lr: 0.0000100 | loss  1.3475 | ms/batch 7033.20 |
+| step   629 |  lr: 0.0000100 | loss  1.2996 | ms/batch 6909.48 |
+| step   639 |  lr: 0.0000100 | loss  1.3217 | ms/batch 6883.36 |
+| step   649 |  lr: 0.0000100 | loss  1.2995 | ms/batch 6983.59 |
+| step   659 |  lr: 0.0000100 | loss  1.3196 | ms/batch 7180.24 |
+-----------------------------------------------------------------------
+| epoch   4 | step   665 | dev_acc  0.4537 | test_acc  0.4504 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.4
+| step   669 |  lr: 0.0000100 | loss  1.2972 | ms/batch 3661.09 |
+| step   679 |  lr: 0.0000100 | loss  1.2992 | ms/batch 7099.37 |
+| step   689 |  lr: 0.0000100 | loss  1.3489 | ms/batch 7141.41 |
+| step   699 |  lr: 0.0000100 | loss  1.2748 | ms/batch 7012.64 |
+| step   709 |  lr: 0.0000100 | loss  1.2865 | ms/batch 6995.73 |
+| step   719 |  lr: 0.0000100 | loss  1.3487 | ms/batch 6897.11 |
+| step   729 |  lr: 0.0000100 | loss  1.3110 | ms/batch 6999.95 |
+| step   739 |  lr: 0.0000100 | loss  1.3114 | ms/batch 6903.10 |
+| step   749 |  lr: 0.0000100 | loss  1.3033 | ms/batch 6895.41 |
+| step   759 |  lr: 0.0000100 | loss  1.3164 | ms/batch 6983.84 |
+| step   769 |  lr: 0.0000100 | loss  1.2942 | ms/batch 6927.63 |
+| step   779 |  lr: 0.0000100 | loss  1.3289 | ms/batch 128390.70 |
+| step   789 |  lr: 0.0000100 | loss  1.3171 | ms/batch 7148.24 |
+-----------------------------------------------------------------------
+| epoch   5 | step   798 | dev_acc  0.4455 | test_acc  0.4247 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.5
+| step   799 |  lr: 0.0000100 | loss  1.3138 | ms/batch 1399.80 |
+| step   809 |  lr: 0.0000100 | loss  1.2753 | ms/batch 6837.06 |
+| step   819 |  lr: 0.0000100 | loss  1.2440 | ms/batch 7206.95 |
+| step   829 |  lr: 0.0000100 | loss  1.3251 | ms/batch 6862.01 |
+| step   839 |  lr: 0.0000100 | loss  1.3264 | ms/batch 7088.51 |
+| step   849 |  lr: 0.0000100 | loss  1.3224 | ms/batch 7042.94 |
+| step   859 |  lr: 0.0000100 | loss  1.3301 | ms/batch 7074.35 |
+| step   869 |  lr: 0.0000100 | loss  1.2908 | ms/batch 7072.97 |
+| step   879 |  lr: 0.0000100 | loss  1.3351 | ms/batch 6999.68 |
+| step   889 |  lr: 0.0000100 | loss  1.2654 | ms/batch 6961.06 |
+| step   899 |  lr: 0.0000100 | loss  1.2738 | ms/batch 7077.14 |
+| step   909 |  lr: 0.0000100 | loss  1.2365 | ms/batch 7080.10 |
+| step   919 |  lr: 0.0000100 | loss  1.2840 | ms/batch 7368.22 |
+| step   929 |  lr: 0.0000100 | loss  1.3254 | ms/batch 7251.79 |
+-----------------------------------------------------------------------
+| epoch   6 | step   931 | dev_acc  0.4660 | test_acc  0.4351 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.6
+| step   939 |  lr: 0.0000100 | loss  1.2968 | ms/batch 6453.98 |
+| step   949 |  lr: 0.0000100 | loss  1.2892 | ms/batch 7093.75 |
+| step   959 |  lr: 0.0000100 | loss  1.2907 | ms/batch 7023.84 |
+| step   969 |  lr: 0.0000100 | loss  1.1835 | ms/batch 7100.00 |
+| step   979 |  lr: 0.0000100 | loss  1.2480 | ms/batch 7126.34 |
+| step   989 |  lr: 0.0000100 | loss  1.2614 | ms/batch 6951.97 |
+| step   999 |  lr: 0.0000100 | loss  1.2523 | ms/batch 6983.81 |
+| step  1009 |  lr: 0.0000100 | loss  1.2306 | ms/batch 7220.11 |
+| step  1019 |  lr: 0.0000100 | loss  1.1530 | ms/batch 7005.95 |
+| step  1029 |  lr: 0.0000100 | loss  1.1794 | ms/batch 6997.65 |
+| step  1039 |  lr: 0.0000100 | loss  1.2173 | ms/batch 7742.50 |
+| step  1049 |  lr: 0.0000100 | loss  1.2076 | ms/batch 6980.22 |
+| step  1059 |  lr: 0.0000100 | loss  1.2199 | ms/batch 7108.11 |
+-----------------------------------------------------------------------
+| epoch   7 | step  1064 | dev_acc  0.5414 | test_acc  0.5036 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.7
+| step  1069 |  lr: 0.0000100 | loss  1.1882 | ms/batch 4309.01 |
+| step  1079 |  lr: 0.0000100 | loss  1.0957 | ms/batch 7090.30 |
+| step  1089 |  lr: 0.0000100 | loss  1.0850 | ms/batch 7003.72 |
+| step  1099 |  lr: 0.0000100 | loss  1.0456 | ms/batch 6965.44 |
+| step  1109 |  lr: 0.0000100 | loss  1.0909 | ms/batch 6941.20 |
+| step  1119 |  lr: 0.0000100 | loss  1.0935 | ms/batch 6953.77 |
+| step  1129 |  lr: 0.0000100 | loss  1.1455 | ms/batch 6896.75 |
+| step  1139 |  lr: 0.0000100 | loss  1.0500 | ms/batch 6973.58 |
+| step  1149 |  lr: 0.0000100 | loss  1.0575 | ms/batch 6961.17 |
+| step  1159 |  lr: 0.0000100 | loss  0.9511 | ms/batch 6954.95 |
+| step  1169 |  lr: 0.0000100 | loss  1.0085 | ms/batch 7149.93 |
+| step  1179 |  lr: 0.0000100 | loss  0.9941 | ms/batch 7031.28 |
+| step  1189 |  lr: 0.0000100 | loss  0.9453 | ms/batch 7007.80 |
+-----------------------------------------------------------------------
+| epoch   8 | step  1197 | dev_acc  0.6757 | test_acc  0.6479 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.8
+| step  1199 |  lr: 0.0000100 | loss  0.9398 | ms/batch 2151.98 |
+| step  1209 |  lr: 0.0000100 | loss  0.8715 | ms/batch 7032.04 |
+| step  1219 |  lr: 0.0000100 | loss  0.8555 | ms/batch 7036.68 |
+| step  1229 |  lr: 0.0000100 | loss  0.8149 | ms/batch 7050.17 |
+| step  1239 |  lr: 0.0000100 | loss  0.7727 | ms/batch 7001.39 |
+| step  1249 |  lr: 0.0000100 | loss  0.7860 | ms/batch 6999.33 |
+| step  1259 |  lr: 0.0000100 | loss  0.7465 | ms/batch 6982.29 |
+| step  1269 |  lr: 0.0000100 | loss  0.7714 | ms/batch 7176.56 |
+| step  1279 |  lr: 0.0000100 | loss  0.7191 | ms/batch 7124.57 |
+| step  1289 |  lr: 0.0000100 | loss  0.7031 | ms/batch 7104.12 |
+| step  1299 |  lr: 0.0000100 | loss  0.7345 | ms/batch 7206.48 |
+| step  1309 |  lr: 0.0000100 | loss  0.7011 | ms/batch 7259.22 |
+| step  1319 |  lr: 0.0000100 | loss  0.7967 | ms/batch 7137.63 |
+| step  1329 |  lr: 0.0000100 | loss  0.7286 | ms/batch 7033.11 |
+-----------------------------------------------------------------------
+| epoch   9 | step  1330 | dev_acc  0.7551 | test_acc  0.7204 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.9
+| step  1339 |  lr: 0.0000100 | loss  0.5806 | ms/batch 7120.12 |
+| step  1349 |  lr: 0.0000100 | loss  0.5881 | ms/batch 7075.10 |
+| step  1359 |  lr: 0.0000100 | loss  0.6138 | ms/batch 7097.81 |
+| step  1369 |  lr: 0.0000100 | loss  0.5944 | ms/batch 7300.55 |
+| step  1379 |  lr: 0.0000100 | loss  0.6096 | ms/batch 7230.92 |
+| step  1389 |  lr: 0.0000100 | loss  0.5869 | ms/batch 7208.36 |
+| step  1399 |  lr: 0.0000100 | loss  0.5898 | ms/batch 7103.27 |
+| step  1409 |  lr: 0.0000100 | loss  0.6159 | ms/batch 7225.63 |
+| step  1419 |  lr: 0.0000100 | loss  0.6748 | ms/batch 7122.75 |
+| step  1429 |  lr: 0.0000100 | loss  0.6715 | ms/batch 7080.03 |
+| step  1439 |  lr: 0.0000100 | loss  0.5758 | ms/batch 7022.66 |
+| step  1449 |  lr: 0.0000100 | loss  0.5723 | ms/batch 7114.15 |
+| step  1459 |  lr: 0.0000100 | loss  0.6224 | ms/batch 7129.36 |
+-----------------------------------------------------------------------
+| epoch  10 | step  1463 | dev_acc  0.7559 | test_acc  0.7341 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.10
+| step  1469 |  lr: 0.0000100 | loss  0.4806 | ms/batch 5044.46 |
+| step  1479 |  lr: 0.0000100 | loss  0.4285 | ms/batch 7173.86 |
+| step  1489 |  lr: 0.0000100 | loss  0.4435 | ms/batch 7097.40 |
+| step  1499 |  lr: 0.0000100 | loss  0.4567 | ms/batch 7112.19 |
+| step  1509 |  lr: 0.0000100 | loss  0.4088 | ms/batch 7060.51 |
+| step  1519 |  lr: 0.0000100 | loss  0.4698 | ms/batch 7224.12 |
+| step  1529 |  lr: 0.0000100 | loss  0.4509 | ms/batch 7020.56 |
+| step  1539 |  lr: 0.0000100 | loss  0.4578 | ms/batch 6956.72 |
+| step  1549 |  lr: 0.0000100 | loss  0.4996 | ms/batch 6970.26 |
+| step  1559 |  lr: 0.0000100 | loss  0.5383 | ms/batch 6920.60 |
+| step  1569 |  lr: 0.0000100 | loss  0.4583 | ms/batch 6917.38 |
+| step  1579 |  lr: 0.0000100 | loss  0.4169 | ms/batch 6965.79 |
+| step  1589 |  lr: 0.0000100 | loss  0.4333 | ms/batch 6943.40 |
+-----------------------------------------------------------------------
+| epoch  11 | step  1596 | dev_acc  0.7617 | test_acc  0.7381 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.11
+| step  1599 |  lr: 0.0000100 | loss  0.4115 | ms/batch 2815.66 |
+| step  1609 |  lr: 0.0000100 | loss  0.3717 | ms/batch 7158.75 |
+| step  1619 |  lr: 0.0000100 | loss  0.3296 | ms/batch 7047.94 |
+| step  1629 |  lr: 0.0000100 | loss  0.3699 | ms/batch 7134.57 |
+| step  1639 |  lr: 0.0000100 | loss  0.4116 | ms/batch 7165.96 |
+| step  1649 |  lr: 0.0000100 | loss  0.3129 | ms/batch 7117.12 |
+| step  1659 |  lr: 0.0000100 | loss  0.3481 | ms/batch 7134.35 |
+| step  1669 |  lr: 0.0000100 | loss  0.3510 | ms/batch 7099.36 |
+| step  1679 |  lr: 0.0000100 | loss  0.3729 | ms/batch 7404.47 |
+| step  1689 |  lr: 0.0000100 | loss  0.3571 | ms/batch 7075.27 |
+| step  1699 |  lr: 0.0000100 | loss  0.3577 | ms/batch 7463.25 |
+| step  1709 |  lr: 0.0000100 | loss  0.3451 | ms/batch 7110.63 |
+| step  1719 |  lr: 0.0000100 | loss  0.3540 | ms/batch 7015.37 |
+-----------------------------------------------------------------------
+| epoch  12 | step  1729 | dev_acc  0.7756 | test_acc  0.7405 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.12
+| step  1729 |  lr: 0.0000100 | loss  0.3286 | ms/batch  742.67 |
+| step  1739 |  lr: 0.0000100 | loss  0.2474 | ms/batch 7145.36 |
+| step  1749 |  lr: 0.0000100 | loss  0.2920 | ms/batch 7082.08 |
+| step  1759 |  lr: 0.0000100 | loss  0.2711 | ms/batch 7106.97 |
+| step  1769 |  lr: 0.0000100 | loss  0.2979 | ms/batch 7103.86 |
+| step  1779 |  lr: 0.0000100 | loss  0.2661 | ms/batch 7023.71 |
+| step  1789 |  lr: 0.0000100 | loss  0.2591 | ms/batch 7043.78 |
+| step  1799 |  lr: 0.0000100 | loss  0.2407 | ms/batch 7026.71 |
+| step  1809 |  lr: 0.0000100 | loss  0.2698 | ms/batch 7023.65 |
+| step  1819 |  lr: 0.0000100 | loss  0.2891 | ms/batch 6997.14 |
+| step  1829 |  lr: 0.0000100 | loss  0.2946 | ms/batch 7037.34 |
+| step  1839 |  lr: 0.0000100 | loss  0.2757 | ms/batch 7063.13 |
+| step  1849 |  lr: 0.0000100 | loss  0.2487 | ms/batch 7014.62 |
+| step  1859 |  lr: 0.0000100 | loss  0.2766 | ms/batch 7006.51 |
+-----------------------------------------------------------------------
+| epoch  13 | step  1862 | dev_acc  0.7797 | test_acc  0.7405 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.13
+| step  1869 |  lr: 0.0000100 | loss  0.2057 | ms/batch 5654.10 |
+| step  1879 |  lr: 0.0000100 | loss  0.1845 | ms/batch 7011.02 |
+| step  1889 |  lr: 0.0000100 | loss  0.1543 | ms/batch 7017.00 |
+| step  1899 |  lr: 0.0000100 | loss  0.1596 | ms/batch 7256.39 |
+| step  1909 |  lr: 0.0000100 | loss  0.2074 | ms/batch 7183.91 |
+| step  1919 |  lr: 0.0000100 | loss  0.2301 | ms/batch 7163.97 |
+| step  1929 |  lr: 0.0000100 | loss  0.2076 | ms/batch 7167.05 |
+| step  1939 |  lr: 0.0000100 | loss  0.1981 | ms/batch 7183.88 |
+| step  1949 |  lr: 0.0000100 | loss  0.2371 | ms/batch 7218.32 |
+| step  1959 |  lr: 0.0000100 | loss  0.2646 | ms/batch 7219.62 |
+| step  1969 |  lr: 0.0000100 | loss  0.2396 | ms/batch 7252.52 |
+| step  1979 |  lr: 0.0000100 | loss  0.1922 | ms/batch 7289.63 |
+| step  1989 |  lr: 0.0000100 | loss  0.2475 | ms/batch 7263.07 |
+-----------------------------------------------------------------------
+| epoch  14 | step  1995 | dev_acc  0.7658 | test_acc  0.7317 |
+-----------------------------------------------------------------------
+model saved to saved_models/csqa/enc-FacebookAI/roberta-large__k5__gnndim200__bs64__seed0__20240320_173213/model.pt.14

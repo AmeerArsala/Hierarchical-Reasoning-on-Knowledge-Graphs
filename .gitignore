@@ -5,6 +5,7 @@
 saved*
 
 __pycache__/
+.mypy_cache/
 
 *.pt
 *.zip
